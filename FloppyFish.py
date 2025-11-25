@@ -3,27 +3,9 @@ import random
 from collections import deque
 from setup import *
 from pipe import Pipe
-from fish import Bird
 
 
-# -------------------------------
-# Sprite Loader
-# -------------------------------
-class SpriteLoader:
-    def __init__(self):
-        self.background = self.load("img/background.png", (WIDTH, HEIGHT))
-        self.pipe = self.load("img/pipe.png")
-        self.pipe_flipped = pygame.transform.flip(self.pipe, False, True)
-        self.bird = self.load("img/bird.png")
-
-    @staticmethod
-    def load(path, scale=None):
-        img = pygame.image.load(path).convert_alpha()
-        if scale:
-            img = pygame.transform.scale(img, scale)
-        return img
-
-class GameLoop:
+class PipeManager:
     def __init__(self, sprite_loader):
         self.pipes = deque()
         self.sprite_top = sprite_loader.pipe_flipped
@@ -66,3 +48,5 @@ class GameLoop:
         for p in self.pipes:
             if bird.rect.colliderect(p.top_rect()) or bird.rect.colliderect(p.bottom_rect()):
                 return True
+        return False
+

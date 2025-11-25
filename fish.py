@@ -6,7 +6,8 @@ class Bird:
         self.x = x
         self.y = y
         self.vel = 0
-        self.sprite = sprite
+        self.scale = (sprite.get_width() // 5, sprite.get_height() // 5)
+        self.sprite = pygame.transform.scale(sprite, self.scale)
         self.rect = self.sprite.get_rect(center=(self.x, self.y))
         self.alive = True
 
